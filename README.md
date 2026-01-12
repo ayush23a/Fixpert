@@ -48,10 +48,10 @@ The system consists of two main components:
     pip install fastapi uvicorn google-genai sqlmodel python-dotenv
     ```
 4.  Configure your API key:
-    *   Rename `.env.example` to `.env` (or create a new `.env` file).
+    *   Create a new `.env` file in backend directory.
     *   Add your key:
         ```env
-        GEMINI_API_KEY=your_actual_api_key_here
+        GEMINI_API_KEY= "your_actual_api_key_here"
         ```
 5.  Start the server:
     ```bash
