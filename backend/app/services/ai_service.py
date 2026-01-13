@@ -14,25 +14,10 @@ class AIService:
         else:
             self.client = genai.Client(api_key=api_key)
 
-    async def analyze_error(self, raw_error: str, language: str = None, api_key_override: str = None) -> ErrorAnalysisResponse:
-        # Use override key if provided, otherwise fall back to system client
+    async def analyze_error(self, raw_error: str, language: str = None) -> ErrorAnalysisResponse:
         client_to_use = self.client
         model_name = self.model_name
-
-        if api_key_override:
-            try:
-                 # Create a temporary client for this request
-                 client_to_use = genai.Client(api_key=api_key_override)
-            except Exception as e:
-                logger.error(f"Failed to initialize client with user key: {e}")
-                return ErrorAnalysisResponse(
-                    summary="Configuration Error: Invalid User API Key",
-                    category="System Error",
-                    root_causes=[],
-                    suggested_steps=["Check the API Key in VS Code Settings."],
-                    uncertainty_statement="The provided API key could not be used."
-                )
-
+        
         if not client_to_use:
              return ErrorAnalysisResponse(
                 summary="Configuration Error: No API Key",

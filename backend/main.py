@@ -27,8 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Services
-ai_service = AIService(api_key=os.getenv("GEMINI_API_KEY"))
+# Global service removed
 
 @app.get("/health")
 async def health_check():
@@ -40,11 +39,25 @@ async def analyze_error(
     session: Session = Depends(get_session)
 ):
     try:
+        # Check for user API key
+        if not request.api_key:
+             # Fallback to system key if available (optional support)
+             system_key = os.getenv("GEMINI_API_KEY")
+             if not system_key:
+                 raise HTTPException(
+                     status_code=400,
+                     detail="API Key missing. Please set it in VS Code Settings."
+                 )
+             ai_service = AIService(api_key=system_key)
+        else:
+            # Use user provided key
+            ai_service = AIService(api_key=request.api_key)
+
         # AI Analysis
+        # Note: we don't need api_key_override arg anymore since we init service with it
         response = await ai_service.analyze_error(
             raw_error=request.raw_error,
-            language=request.language,
-            api_key_override=request.api_key
+            language=request.language
         )
         
         # Optional Storage
@@ -57,6 +70,8 @@ async def analyze_error(
                 print(f"WARNING: Failed to save to history: {e}")
             
         return response
+    except HTTPException:
+        raise
     except Exception as e:
         import traceback
         traceback.print_exc() # Print full stack trace to Render logs
