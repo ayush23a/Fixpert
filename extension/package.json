@@ -42,7 +42,7 @@
       "properties": {
         "fixpert.backendUrl": {
           "type": "string",
-          "default": "http://127.0.0.1:8000",
+          "default": "https://fixpert-4qyn.onrender.com",
           "description": "URL of the AI Analysis Backend"
         },
         "fixpert.enableHistory": {
