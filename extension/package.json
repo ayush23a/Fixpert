@@ -1,8 +1,13 @@
 {
   "name": "fixpert",
   "displayName": "Fixpert",
+  "publisher": "AyushAman",
   "description": "Fixpert: AI-powered error analysis and explanation.",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayush23a/Fixpert"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
