@@ -49,8 +49,12 @@ async def analyze_error(
         
         # Optional Storage
         if request.save_analysis:
-            storage = StorageService(session)
-            storage.save_error(response)
+            try:
+                storage = StorageService(session)
+                storage.save_error(response)
+            except Exception as e:
+                # Log error but don't fail the request
+                print(f"WARNING: Failed to save to history: {e}")
             
         return response
     except Exception as e:
