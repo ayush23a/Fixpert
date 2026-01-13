@@ -1,6 +1,6 @@
-# AI Error Log Analyzer & Explainer 🧠
+# Fixpert 🧠
 
-A production-grade developer tool that brings AI-powered error analysis directly into your VS Code workflow. It analyzes error logs, stack traces, and terminal output to provide clear, structured explanations and actionable debugging steps using Google's Gemini models.
+Fixpert is a production-grade developer tool that brings AI-powered error analysis directly into your VS Code workflow. It analyzes error logs, stack traces, and terminal output to provide clear, structured explanations and actionable debugging steps using Google's Gemini models.
 
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Python](https://img.shields.io/badge/backend-FastAPI-green)

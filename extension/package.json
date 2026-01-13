@@ -1,8 +1,8 @@
 {
-  "name": "error-explainer",
-  "displayName": "Explain with AI",
-  "description": "AI-powered error analysis and explanation.",
-  "version": "0.0.1",
+  "name": "fixpert",
+  "displayName": "Fixpert",
+  "description": "Fixpert: AI-powered error analysis and explanation.",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -38,22 +38,22 @@
       ]
     },
     "configuration": {
-      "title": "Explain with AI",
+      "title": "Fixpert Settings",
       "properties": {
-        "errorExplainer.backendUrl": {
+        "fixpert.backendUrl": {
           "type": "string",
           "default": "http://127.0.0.1:8000",
           "description": "URL of the AI Analysis Backend"
         },
-        "errorExplainer.enableHistory": {
+        "fixpert.enableHistory": {
           "type": "boolean",
           "default": false,
           "description": "Opt-in to save error explanation history to the database."
         },
-        "errorExplainer.apiKey": {
+        "fixpert.apiKey": {
           "type": "string",
           "default": "",
-          "description": "API Key for the AI Model (if using direct or proxied access requiring auth)."
+          "description": "Your Google Gemini API Key. If provided, this key is used instead of the backend's default key."
         }
       }
     }

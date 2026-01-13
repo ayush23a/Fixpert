@@ -14,22 +14,40 @@ class AIService:
             self.client = genai.Client(api_key=api_key)
             self.model_name = 'gemini-2.5-flash'
 
-    async def analyze_error(self, raw_error: str, language: str = None) -> ErrorAnalysisResponse:
-        if not self.client:
+    async def analyze_error(self, raw_error: str, language: str = None, api_key_override: str = None) -> ErrorAnalysisResponse:
+        # Use override key if provided, otherwise fall back to system client
+        client_to_use = self.client
+        model_name = self.model_name
+
+        if api_key_override:
+            try:
+                 # Create a temporary client for this request
+                 client_to_use = genai.Client(api_key=api_key_override)
+            except Exception as e:
+                logger.error(f"Failed to initialize client with user key: {e}")
+                return ErrorAnalysisResponse(
+                    summary="Configuration Error: Invalid User API Key",
+                    category="System Error",
+                    root_causes=[],
+                    suggested_steps=["Check the API Key in VS Code Settings."],
+                    uncertainty_statement="The provided API key could not be used."
+                )
+
+        if not client_to_use:
              return ErrorAnalysisResponse(
                 summary="Configuration Error: No API Key",
                 category="System Error",
                 root_causes=[],
-                suggested_steps=["Set GEMINI_API_KEY in .env"],
+                suggested_steps=["Set GEMINI_API_KEY in .env or VS Code Settings"],
                 uncertainty_statement="API Key missing."
             )
-
+        
         prompt = self._construct_prompt(raw_error, language)
         
         try:
             # Generate content using new SDK
-            response = self.client.models.generate_content(
-                model=self.model_name,
+            response = client_to_use.models.generate_content(
+                model=model_name,
                 contents=prompt
             )
             response_text = response.text

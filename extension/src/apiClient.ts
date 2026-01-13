@@ -14,19 +14,21 @@ export class ApiClient {
 
     constructor() {
         // Read configuration
-        const config = vscode.workspace.getConfiguration('errorExplainer');
+        const config = vscode.workspace.getConfiguration('fixpert');
         this.backendUrl = config.get<string>('backendUrl') || 'http://127.0.0.1:8000';
     }
 
     public async analyzeError(rawError: string, language?: string): Promise<ErrorAnalysisResponse> {
-        const config = vscode.workspace.getConfiguration('errorExplainer');
+        const config = vscode.workspace.getConfiguration('fixpert');
         const enableHistory = config.get<boolean>('enableHistory') || false;
+        const userApiKey = config.get<string>('apiKey') || '';
 
         try {
             const response = await axios.post(`${this.backendUrl}/analyze`, {
                 raw_error: rawError,
                 language: language,
-                save_analysis: enableHistory
+                save_analysis: enableHistory,
+                api_key: userApiKey // Send user key if present
             });
             return response.data;
         } catch (error: any) {

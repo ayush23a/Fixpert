@@ -25,12 +25,11 @@ export class AnalysisPanel {
 
         // Otherwise, create a new panel.
         const panel = vscode.window.createWebviewPanel(
-            'errorExplainer',
-            'AI Error Explanation',
-            column || vscode.ViewColumn.One,
+            'fixpert',
+            'Fixpert: AI Error Analysis',
+            vscode.ViewColumn.Beside,
             {
-                enableScripts: true,
-                localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'media')]
+                enableScripts: true
             }
         );
 
