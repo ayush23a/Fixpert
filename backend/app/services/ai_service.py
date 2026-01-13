@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class AIService:
-    def __init__(self, api_                     key: str = None):
+    def __init__(self, api_key: str = None):
         if not api_key:
             logger.warning("GEMINI_API_KEY is not set. AI analysis will fail.")
             self.client = None
