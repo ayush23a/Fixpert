@@ -9,6 +9,7 @@ class ErrorAnalysisRequest(BaseModel):
     language: Optional[str] = Field(None, description="Programming language (e.g., Python, TypeScript)")
     context: Optional[str] = Field(None, description="Additional context from the user")
     save_analysis: bool = Field(False, description="Whether to save this analysis to history (User Opt-in)")
+    api_key: Optional[str] = Field(None, description="API key for authentication or tracking")
 
 class RootCauseHypothesis(BaseModel):
     cause: str
