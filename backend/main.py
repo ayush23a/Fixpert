@@ -58,6 +58,9 @@ async def analyze_error(
             
         return response
     except Exception as e:
+        import traceback
+        traceback.print_exc() # Print full stack trace to Render logs
+        print(f"CRITICAL ERROR IN ANALYZE: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/history", response_model=list[SavedError])
