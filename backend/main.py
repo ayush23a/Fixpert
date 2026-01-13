@@ -43,7 +43,8 @@ async def analyze_error(
         # AI Analysis
         response = await ai_service.analyze_error(
             raw_error=request.raw_error,
-            language=request.language
+            language=request.language,
+            api_key_override=request.api_key
         )
         
         # Optional Storage
