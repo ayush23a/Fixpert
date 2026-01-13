@@ -7,12 +7,12 @@ logger = logging.getLogger(__name__)
 
 class AIService:
     def __init__(self, api_key: str = None):
+        self.model_name = 'gemini-2.5-flash'
         if not api_key:
             logger.warning("GEMINI_API_KEY is not set. AI analysis will fail.")
             self.client = None
         else:
             self.client = genai.Client(api_key=api_key)
-            self.model_name = 'gemini-2.5-flash'
 
     async def analyze_error(self, raw_error: str, language: str = None, api_key_override: str = None) -> ErrorAnalysisResponse:
         # Use override key if provided, otherwise fall back to system client
