@@ -4,6 +4,7 @@
   "publisher": "AyushAman",
   "description": "Fixpert explains errors from your code and terminal using AI, helping you quickly understand root causes with their confidence scores and apply fixes inside VS Code.",
   "version": "0.1.1",
+  "license": "Apache-2.0",
   "icon": "image/analysis.png",
   "repository": {
     "type": "git",
