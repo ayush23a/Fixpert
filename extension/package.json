@@ -2,8 +2,9 @@
   "name": "fixpert",
   "displayName": "Fixpert",
   "publisher": "AyushAman",
-  "description": "Fixpert: AI-powered error analysis and explanation.",
-  "version": "0.1.0",
+  "description": "Fixpert explains errors from your code and terminal using AI, helping you quickly understand root causes with their confidence scores and apply fixes inside VS Code.",
+  "version": "0.1.1",
+  "icon": "image/analysis.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/ayush23a/Fixpert"
@@ -12,8 +13,11 @@
     "vscode": "^1.80.0"
   },
   "categories": [
-    "Other"
+  "Programming Languages",
+  "Debuggers",
+  "Other"
   ],
+
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -48,7 +52,9 @@
         "fixpert.backendUrl": {
           "type": "string",
           "default": "https://fixpert-4qyn.onrender.com",
-          "description": "URL of the AI Analysis Backend"
+          "description": "URL of the AI Analysis Backend",
+          "scope": "application",
+          "markdownDescription": "**Internal setting. Do not modify.**"
         },
         "fixpert.enableHistory": {
           "type": "boolean",
@@ -58,7 +64,7 @@
         "fixpert.apiKey": {
           "type": "string",
           "default": "",
-          "description": "Your Google Gemini API Key. If provided, this key is used instead of the backend's default key."
+          "description": "Your Google Gemini API Key. Provide this key to use the AI analysis features."
         }
       }
     }
